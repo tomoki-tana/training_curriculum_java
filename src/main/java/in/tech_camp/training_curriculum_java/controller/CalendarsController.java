@@ -1,5 +1,6 @@
 package in.tech_camp.training_curriculum_java.controller;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,10 +66,22 @@ public class CalendarsController {
               todayPlans.add(plan.getPlan());
           }
       }
-
+      DayOfWeek dayOfWeek = currentDate.getDayOfWeek();
+      String currentDayOfWeek = "";
+      switch (dayOfWeek) {
+        case MONDAY -> currentDayOfWeek = wdays[1];
+        case TUESDAY -> currentDayOfWeek =  wdays[2];
+        case WEDNESDAY -> currentDayOfWeek = wdays[3];
+        case THURSDAY -> currentDayOfWeek = wdays[4];
+        case FRIDAY -> currentDayOfWeek = wdays[5];
+        case SATURDAY -> currentDayOfWeek = wdays[6];
+        case SUNDAY -> currentDayOfWeek = wdays[0];
+      }
+      // String currentDayOfWeek = wdays[dayOfWeek.WEDNESDAY];
       dayMap.put("month", currentDate.getMonthValue());
       dayMap.put("date", currentDate.getDayOfMonth());
       dayMap.put("plans", todayPlans);
+      dayMap.put("dayOfWeek", currentDayOfWeek);
 
       weekDays.add(dayMap);
     }

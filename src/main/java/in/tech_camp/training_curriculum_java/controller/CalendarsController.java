@@ -18,13 +18,15 @@ import in.tech_camp.training_curriculum_java.repository.PlanRepository;
 import in.tech_camp.training_curriculum_java.form.PlanForm;
 import in.tech_camp.training_curriculum_java.entity.PlanEntity;
 
-import lombok.AllArgsConstructor;
-
 @Controller
-@AllArgsConstructor
 public class CalendarsController {
 
+    public CalendarsController(in.tech_camp.training_curriculum_java.repository.PlanRepository planRepository) {
+        this.planRepository = planRepository;
+    }
+
   private final PlanRepository planRepository;
+  
 
   // 1週間のカレンダーと予定が表示されるページ
   @GetMapping("/")
@@ -56,7 +58,7 @@ public class CalendarsController {
     String[] wdays = {"(日)", "(月)", "(火)", "(水)", "(木)", "(金)", "(土)"};
 
     for (int x = 0; x < 7; x++) {
-      Map<String, Object> day_map = new HashMap<String, Object>();
+      Map<String, Object> day_map = new HashMap<>();
       LocalDate currentDate = todaysDate.plusDays(x);
 
       List<String> todayPlans = new ArrayList<>();
